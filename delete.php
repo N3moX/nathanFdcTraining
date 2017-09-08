@@ -5,5 +5,4 @@
 	echo"<script>
 			window.location.href='user_list.php'
 		</script>";
-		sfsfs
  ?>

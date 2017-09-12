@@ -1,6 +1,5 @@
 <?php 
-	function db()
-	{
+	function db(){
 		try {
 			$db = new PDO("mysql:host=localhost;dbname=my_db","root","admin123");
 			return $db;
@@ -9,8 +8,7 @@
 		}
 	}
 
-	function add_user($firstname, $middlename, $lastname, $gender, $birthdate, $created_date, $modified_date, $created_ip, $modified_ip)
-	{
+	function add_user($firstname, $middlename, $lastname, $gender, $birthdate, $created_date, $modified_date, $created_ip, $modified_ip){
 		$db = db();
 		$sql = "INSERT INTO users(firstname, middlename, lastname, gender, birthdate, created_date, modified_date, created_ip, modified_ip) 
 				VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -19,8 +17,7 @@
 		$db = null;
 	}
 
-	function count_users()
-	{
+	function count_users(){
 		$db = db();
 		$sql = "SELECT COUNT(user_id) FROM users";		
 		$st = $db->prepare($sql);
@@ -31,20 +28,17 @@
 	}
 
 /*	<-------- Get Data functions -------->  */
+	function search($word){
+		$db = db();
+		$sql = "SELECT * FROM users WHERE firstname LIKE '%$word%' or middlename LIKE '%$word%'";
+		$st = $db->prepare($sql);
+		$st->execute(array($word));
+		$users = $st->fetchAll();
+		$db = null;
+		return $users;
+	}
 
-	// function get_users()
-	// {
-	// 	$db = db();
-	// 	$sql = "SELECT * FROM users";
-	// 	$st = $db->prepare($sql);
-	// 	$st->execute(array());
-	// 	$users = $st->fetchAll();
-	// 	$db = null;
-	// 	return $users;
-	// }
-
-	function get_user($user_id)
-	{
+	function get_user($user_id){
 		$db = db();
 		$sql = "SELECT * FROM users WHERE user_id=?";
 		$st = $db->prepare($sql);
@@ -54,10 +48,9 @@
 		return $user;	
 	}
 
-	function get_users($limit, $offset)
-	{	
+	function get_users($limit, $offset){	
 		$db = db();
-		$sql = "SELECT * FROM users LIMIT $offset, $limit";
+		$sql = "SELECT * FROM users ORDER BY user_id DESC LIMIT $offset, $limit";
 		$st = $db->prepare($sql);
 		$st->execute();
 		$users = $st->fetchAll();
@@ -67,8 +60,7 @@
 
 /*	<-------- Delete and Update functions -------->  */
 
-	function delete_user($user_id)
-	{
+	function delete_user($user_id){
 		$db = db();
 		$sql = "DELETE FROM users WHERE user_id =?";
 		$st = $db->prepare($sql);
@@ -76,8 +68,7 @@
 		$db = null;
 	}
 
-	function update_user($firstname, $middlename, $lastname, $gender, $bithdate, $created_date, $modified_date, $created_ip, $modified_ip, $user_id)
-	{
+	function update_user($firstname, $middlename, $lastname, $gender, $bithdate, $created_date, $modified_date, $created_ip, $modified_ip, $user_id){
 		$db = db();
 		$sql = "UPDATE users SET firstname=?, middlename=?, lastname=?, gender=?, birthdate=?, created_date=?, modified_date=?, created_ip=?, modified_ip=? WHERE user_id=?";
 		$st = $db->prepare($sql);

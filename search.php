@@ -1,26 +1,13 @@
 <?php 
 	include('api.php');
-	$number_of_users = count_users();
-	echo "Number of users = ".$number_of_users;
-	echo "<br>";
-	//$limit = trim($_GET['entries']);
-	$limit = isset($_GET['entries'])?$_GET['entries']:10;
-	echo "Limit: ".$limit."<br>";
-	$num_of_pages = ceil($number_of_users / $limit);
-	echo "Number of pages=".$num_of_pages."<br>";
 
-	$page = isset($_GET['page'])?$_GET['page']:1;
-	echo "Page value :".$page."<br>";
-	
+	$word = null;
+	if(isset($_GET['search'])){
+		$word = $_GET['search'];
 
-	$start=$limit*($page-1);
-	echo "Starting value: ".$start."<br>";
-
-	$newLimit= $limit;
-	echo "New Limit value: ".$newLimit."<br>";
-	$users = get_users($limit, $start);
-
-
+	}
+	echo $word;
+	$users = search($word);
 
  ?>
 <!DOCTYPE html>
@@ -36,29 +23,19 @@
 	</head>
 	<body>
 
-		<script>
-			$(document).ready(function(){
-				$('#entries').change(function(){ 
-					$('#pagination_form').submit();
-				});
-			});
-		</script>
-
- 		<div class="container">
+<br><br>
+ 		<div class="container">	
   		  	<a href="index.php">Registration form</a>	|
-  		  	<a href="search.php">Search a user</a>		
- 		  	<h2>User list</h2>
-
- 		  	
-			<div class="col-lg-1">
-					<form id="pagination_form">
-					<select class="form-control" name="entries" id ="entries">
-						<option value="" selected disabled><?php echo "Limit:".$limit; ?></option>
-						<option <?php echo (isset($_GET['entries']) && $_GET['entries'] == '10') ? 'selected' : '' ?>>10</option>
-						<option <?php echo (isset($_GET['entries']) && $_GET['entries'] == '20') ? 'selected' : '' ?>>20</option>
-					</select>
-				</form>				
-			</div>
+  		  	<a href="user_list.php">Users List table</a>		
+ 		  	<h2>Search Users</h2>
+		  <div class="row">
+		  		<div class="col">
+			    	<form >
+			    		<input type="text" name="search" placeholder="Search">
+			    		<button class="btn btn-info"><i class="glyphicon glyphicon-search"></i></button>
+			    	</form>
+			    </div>
+		  </div>
 
 			<table class="table table-hover table-bordered">
 				<thead>
@@ -81,7 +58,7 @@
 					$count = 1;
 					foreach ($users as $u) { ?>
 					<tr>
-						<td style="text-align: center"><?php echo $count++ ?></td>
+						<td><?php echo $count++ ?></td>
 						<td style="text-align: center"><?php echo $u['firstname'] ?></td>
 						<td style="text-align: center"><?php echo $u['middlename'] ?></td>
 						<td style="text-align: center"><?php echo $u['lastname'] ?></td>
@@ -103,22 +80,9 @@
 						</td>
 
 					</tr>
-
 				<?php } ?>
 				</tbody>
 			</table> 
-					<ul class="pagination">
-					  <li class="previous"><a href="user_list.php?page=<?php if($page==1){echo $page=1;}else{echo $page-1;} ?>">Prev</a></li>
-			<?php 
-					for($i = 1; $i<=$num_of_pages; $i++){		?>
-					  <li class="<?php if($i==$page){echo 'active';} ?>"><a href="user_list.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-			<?php   }											?>
-					  <li class="next"><a href="user_list.php?page=<?php if($page==$num_of_pages){echo $page=$num_of_pages;}else{echo $page+1;} ?>">Next</a></li>
-					</ul>
-		</div >
+		</div>
 	</body>
 </html>
-
-<?php 
-
-  ?>

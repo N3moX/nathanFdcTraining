@@ -7,7 +7,7 @@
 	
 	$user = get_user($user_id);
 	
-	var_dump($user);
+//	var_dump($user);
 	if (isset($_POST['update']))
 	{
 		$firstname = trim($_POST['firstname']);
@@ -40,54 +40,53 @@
 	<?php foreach($user as $u){ ?>
 	<div class="container">
 		<form method= "POST">
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<h3>Update user information</h3>						
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<h3>Update user information</h3>						
+				</div>
 			</div>
+			<div class="form-group">
+			 	<div class="col-md-6">
+			  		<input id="fn" name="firstname" type="text" class="form-control input-md" value="<?php echo $u['firstname'] ?>" required="">
+			 	</div>
+			</div>
+			 <br>
+			 <div class="form-group">
+			 	<div class="col-md-6">
+			  		<input id="fn" name="middlename" type="text" class="form-control input-md" value="<?php echo $u['middlename'] ?>" required="">
+			 	</div>	
+			 </div>
+			 <br>
+			 <div class="form-group">
+			  	<div class="col-md-6">
+			  		<input id="fn" name="lastname" type="text" class="form-control input-md" value="<?php echo $u['lastname'] ?>" required="">
+			 	</div>
+			 </div>	
+			 <br>
 
-		</div>
-		<div class="form-group">
-		  <div class="col-md-6">
-		  <input id="fn" name="firstname" type="text" class="form-control input-md" value="<?php echo $u['firstname'] ?>" required="">
-		 </div>
-		 <br>
-		 <div class="form-group">
-		  <div class="col-md-6">
-		  <input id="fn" name="middlename" type="text" class="form-control input-md" value="<?php echo $u['middlename'] ?>" required="">
-		 </div>
-		 <br>
-		 <div class="form-group">
-		  <div class="col-md-6">
-		  <input id="fn" name="lastname" type="text" class="form-control input-md" value="<?php echo $u['lastname'] ?>" required="">
-		 </div>	
-		 <br>
-<!-- 		 <div class="form-group">
-		  <div class="col-md-6">
-		  <input id="fn" name="gender" type="text" placeholder="gender" class="form-control input-md" required="">
-		 </div>
- -->
- 		 <div class="form-group">
-		 	<div class="col-md-2">
-		 	  <select value="<?php $u['gender'] ?>" class="form-control" id="sel1" name="gender" required="">
-		 	  	<option selected disabled>Gender</option>
-		        <option>Male</option>
-		        <option>Female</option>
-		        <option>Others</option>
-		      </select>
-		 	</div>
-		 </div>
-		 <br>
-		 <div class="form-group">
-		  <div class="col-md-3">
-		  <input id="fn" name="birthdate" type="date" class="form-control input-md" value="<?php echo $u['birthdate'] ?>" required="">
-		 </div>	
-		 <br>
-		  <div class="form-group"> 
-		    <div class="col-sm-offset-2 col-sm-10">
-		      <input name="update" type="submit" class="btn btn-info btn-lg" value="Update">
-		      <a href="user_list.php" >&lt;&lt;&nbsp;Registered users&nbsp;&gt;&gt;</a>
-		    </div>
-		  </div>
+	 		 <div class="form-group">
+			 	<div class="col-md-2">
+			 	  <select value="<?php $u['gender'] ?>" class="form-control" id="sel1" name="gender" required="">
+			 	  	<option selected disabled>Gender</option>
+			        <option>Male</option>
+			        <option>Female</option>
+			        <option>Others</option>
+			      </select>
+			 	</div>
+			 </div>
+			 <br>
+			 <div class="form-group">
+			  	<div class="col-md-3">
+			  		<input id="fn" name="birthdate" type="date" class="form-control input-md" value="<?php echo $u['birthdate'] ?>" required="">
+			 	</div>	
+			 </div>
+			 <br>
+			 <div class="form-group"> 
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <input name="update" type="submit" class="btn btn-info btn-lg" value="Update">
+			      <a href="user_list.php" >&lt;&lt;&nbsp;Registered users&nbsp;&gt;&gt;</a>
+			    </div>
+			 </div>
 		</form>
 		<?php } ?>
 	</div>

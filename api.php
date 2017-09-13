@@ -1,4 +1,5 @@
 <?php 
+
 	function db(){
 		try {
 			$db = new PDO("mysql:host=localhost;dbname=my_db","root","admin123");

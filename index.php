@@ -41,20 +41,16 @@
 					<input id="fn" name="firstname" type="text" placeholder="firstname" class="form-control input-md" required="">
 				</div>
 			</div>
-			<br>
 			<div class="form-group">
 				<div class="col-md-6">
 					<input id="fn" name="middlename" type="text" placeholder="middlename" class="form-control input-md" required="">
 				</div>
 			</div>
-		 	<br>
 		 	<div class="form-group">
 		  		<div class="col-md-6">
 		  			<input id="fn" name="lastname" type="text" placeholder="lastname" class="form-control input-md" required="">
 		  		</div>
 		 	</div>	
-		 	<br>
-
 	 		<div class="form-group">
 				 <div class="col-md-2">
 					<select class="form-control" id="sel1" name="gender" required="">
@@ -65,13 +61,11 @@
 					</select>
 				</div>
 			</div>
-		 	<br>
 			<div class="form-group">
 				<div class="col-md-3">
 					<input id="fn" name="birthdate" type="date" placeholder="birthdate" class="form-control input-md" required="">
 			  </div>
 			</div>	
-			<br>
 		  	<div class="form-group"> 
 		    	<div class="col-sm-offset-2 col-sm-10">
 		    		<input name="register" type="submit" class="btn btn-info btn-lg" value="Register">
